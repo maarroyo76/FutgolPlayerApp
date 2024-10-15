@@ -1,0 +1,7 @@
+{
+  "name": "FutgolPlayerApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
