@@ -1,13 +1,43 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <ion-title id="header">
+      FutgolPlayer APP
+      <ion-icon name="football"></ion-icon>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div id="container">
+    <div id="title">
+      <h2>
+        Bienvenido a FutgolPlayer APP
+        <ion-icon name="football"></ion-icon>
+      </h2>
+      <p>Tu pasión, tus estadísticas, tu comunidad</p>
+      <h3>Porfavor ingresa sesion para continuar</h3>
+    </div>
+    <ion-list id="form">
+      <ion-item>
+        <ion-input label="Nombre de Usuario" labelPlacement="stacked" placeholder="Ingresa tu username" [(ngModel)]="username"></ion-input>
+      </ion-item>
+      <ion-item> 
+        <ion-input type="password" label="Contraseña" labelPlacement="stacked" placeholder="Ingresa tu contraseña" [(ngModel)]="password">
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
+    </ion-list>
+    <div id="button">
+      <ion-button  expand="block" id="button" (click)="login()">Ingresar</ion-button>
+      <ion-button  expand="block" id="button" fill="outline">Registrarse</ion-button>
+      <p><a>Olvidaste tu contraseña?</a></p>
+    </div>
+  </div>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title id="footer">
+      <ion-label>© 2024 FutgolPlayer APP</ion-label>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

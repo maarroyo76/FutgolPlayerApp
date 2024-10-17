@@ -1,0 +1,37 @@
+{
+    "users":[
+        {
+            "id": 1,
+            "name": "martin",
+            "lastname": "arroyo",
+            "email": "ma.arroyoq@duocuc.cl",
+            "username": "martin",
+            "password": "martin1234"
+        },
+        {
+            "id": 2,
+            "name": "oscar",
+            "lastname": "bustamante",
+            "email": "osca.bustamante@duocuc.cl",
+            "username": "oscar",
+            "password": "oscar1234"
+        },
+        {
+            "id": 3,
+            "name": "renato",
+            "lastname": "reinoso",
+            "email": "re.reinoso@duocuc.cl",
+            "username": "renato",
+            "password": "renato1234"
+        },
+        {
+            "id": 4,
+            "name": "nicolas",
+            "lastname": "cifuentes",
+            "email": "nic.cifuentes@duocuc.cl",
+            "username": "nicolas",
+            "password": "nicolas1234"
+        }
+    ]
+
+}
