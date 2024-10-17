@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { last } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  user: any = {
+  id: '',
+  name: '',
+  lastname: '',
+  username: '',
+  password: '',
+  email: ''
+  };
+
+  constructor(private router: Router) {
+    const navigation = this.router.getCurrentNavigation()?.extras?.state;
+    if (navigation && navigation['user']) {
+      this.user = navigation['user']; // Aquí asignas el usuario que recibiste
+    }
+  }
+
+
 
   ngOnInit() {
   }
+
+  
+
 
 }
