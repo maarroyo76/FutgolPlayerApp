@@ -17,6 +17,10 @@ export class UserService {
     return this.http.get<User[]>('http://localhost:3000/users');
   }
 
+  createUser(user: User) {
+    return this.http.post('http://localhost:3000/users', user);
+  }
+
   validateUser(username: string, password: string) {
     return this.http.get<User[]>('http://localhost:3000/users?username=' + username + '&password=' + password);
   }

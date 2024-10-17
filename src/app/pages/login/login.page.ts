@@ -25,8 +25,13 @@ export class LoginPage implements OnInit {
   async login() {
     this.userService.validateUser(this.username, this.password).subscribe(async (response) => {
       if (response.length > 0) {
+        const navigationExtras = {
+          state: {
+            user: response[0]
+          }
+        };
         this.createToast('Bienvenido ' + response[0].name, 'success');
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home'], navigationExtras);
       } else {
         this.createToast('Usuario o contraseña incorrectos', 'danger');
       }
