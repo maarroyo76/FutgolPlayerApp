@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { last } from 'rxjs';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -18,19 +18,24 @@ export class HomePage implements OnInit {
   email: ''
   };
 
-  constructor(private router: Router) {
-    const navigation = this.router.getCurrentNavigation()?.extras?.state;
-    if (navigation && navigation['user']) {
-      this.user = navigation['user']; // Aquí asignas el usuario que recibiste
+  constructor(
+    private router: Router,
+    private userService: UserService
+  ) {
+    if (this.userService.isAuth()) {
+      this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    } else {
+      this.router.navigate(['/login']);
     }
-  }
+   }
 
 
 
   ngOnInit() {
   }
 
-  
-
-
+  logOut() {
+    this.userService.logOut();
+    this.router.navigate(['/login']);
+  }
 }
