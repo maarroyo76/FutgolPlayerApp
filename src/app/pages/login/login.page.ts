@@ -23,13 +23,8 @@ export class LoginPage implements OnInit {
   async login() {
     this.userService.validateUser(this.username, this.password).subscribe(async (response) => {
       if (response.length > 0) {
-        const navigationExtras = {
-          state: {
-            user: response[0]
-          }
-        };
-        this.createToast('Bienvenido ' + response[0].name, 'success');
-        this.router.navigate(['/home'], navigationExtras);
+        this.createToast('Bienvenido,  ' + response[0].name, 'success');
+        this.router.navigate(['/home']);
       } else {
         this.createToast('Usuario o contraseña incorrectos', 'danger');
       }
@@ -37,7 +32,7 @@ export class LoginPage implements OnInit {
   }
 
   register() {
-    this.router.navigate(['/register']); // Redirige a la página de registro
+    this.router.navigate(['/register']);
   }
 
   createToast(message: string, color: string) {

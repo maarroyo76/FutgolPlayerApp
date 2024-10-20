@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; // Importa Router
-import { ToastController } from '@ionic/angular'; // Importa ToastController
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular'; 
+import { UserService } from '../../services/user.service';
+import { map, Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -9,15 +11,8 @@ import { ToastController } from '@ionic/angular'; // Importa ToastController
 })
 export class RegisterPage implements OnInit {
 
-  user: { 
-    id: string, 
-    name: string, 
-    lastname: string, 
-    username: string, 
-    password: string, 
-    email: string 
-  } = {
-    id: '',
+  user = {
+    id: 0,
     name: '',
     lastname: '',
     username: '',
@@ -25,11 +20,16 @@ export class RegisterPage implements OnInit {
     email: ''
   };
 
-  constructor(private router: Router, private toastController: ToastController) { } // Inyecta el ToastController
+  constructor(
+    private router: Router,
+    private toastController: ToastController,
+    private userService: UserService
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
-  get isFormValid(): boolean {
+  isFormValid(): boolean {
     return this.user.name !== '' && 
            this.user.lastname !== '' && 
            this.user.username !== '' && 
@@ -37,16 +37,46 @@ export class RegisterPage implements OnInit {
            this.user.email !== '';
   }
 
-  async register() { 
-    if (this.isFormValid) {
-      console.log('Usuario registrado con éxito:', this.user);
-      localStorage.setItem('user', JSON.stringify(this.user));
-      await this.showToast('Usuario registrado con éxito', 'success'); 
+  private assignUserId(): Observable<number> {
+    return this.userService.getUsers().pipe(
+      map(users => {
+        return users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
+      })
+    );
+  }
 
-      this.router.navigate(['/home']);
-    } else {
-      await this.showToast('Por favor, completa todos los campos', 'danger'); 
+  register() {
+    if (!this.isFormValid()) {
+      this.showToast('Todos los campos son requeridos', 'danger');
+      return;
     }
+
+    this.assignUserId().pipe(
+      switchMap(newId => {
+        this.user.id = newId;
+        return this.userService.createUser(this.user);
+      })
+    ).subscribe({
+      next: () => {
+        this.showToast('Registro exitoso!', 'success');
+        this.router.navigate(['/login']);
+        this.clearForm();
+      },
+      error: () => {
+        this.showToast('Nombre de usuario ya en uso', 'warning');
+      }
+    });
+  }
+
+  clearForm() {
+    this.user = {
+      id: 0,
+      name: '',
+      lastname: '',
+      username: '',
+      password: '',
+      email: ''
+    };
   }
 
   async showToast(message: string, color: string) { 

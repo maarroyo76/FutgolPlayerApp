@@ -1,15 +1,82 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Home</ion-title>
+    <ion-title>FutgolPlayer APP | Home</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logOut()">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Home</ion-title>
-    </ion-toolbar>
+  <ion-tabs>
+  <ion-tab tab="Teams">
+    <div id="teams-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Equipos</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="example-content">todos los equipos</div>
+      </ion-content>
+    </div>
+  </ion-tab>
+  <ion-tab tab="SearchMatches">
+    <div id="search-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Buscar Partido</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="example-content">Partidos disponibles</div>
+      </ion-content>
+    </div>
+  </ion-tab>
+  <ion-tab tab="CreateMatch">
+    <div id="create-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Crear Partido</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="example-content">crea tu partido</div>
+      </ion-content>
+    </div>
+  </ion-tab>
+  <ion-tab tab="Live">
+    <div id="live-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Partidos en VIVO</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="example-content">Mira partidos en VIVO</div>
+      </ion-content>
+    </div>
+  </ion-tab>
 
-    <h1>{{user.username}}</h1>
-  </ion-header>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="Teams">
+      <ion-icon name="people-circle-outline"></ion-icon>
+      Equipos
+    </ion-tab-button>
+    <ion-tab-button tab="SearchMatches">
+      <ion-icon name="search"></ion-icon>
+      Buscar Partidos
+    </ion-tab-button>
+    <ion-tab-button tab="CreateMatch">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      Crear Partido
+    </ion-tab-button>
+    <ion-tab-button tab="Live">
+      <ion-icon name="radio-outline"></ion-icon>
+      En Vivo
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
 </ion-content>
