@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
+
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  private apiUrl = 'http://localhost:3000/users'; // Tu API base
 
+  constructor(private http: HttpClient) { }
 
-  constructor(
-    private http: HttpClient
-  ) { }
-
-  getUsers() {
-    return this.http.get<User[]>('http://localhost:3000/users');
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl);
   }
 
-  createUser(user: User) {
-    return this.http.post('http://localhost:3000/users', user);
+  createUser(user: User): Observable<User> {
+    return this.http.post<User>(this.apiUrl, user);
   }
 
-  validateUser(username: string, password: string) {
-    return this.http.get<User[]>('http://localhost:3000/users?username=' + username + '&password=' + password);
+  validateUser(username: string, password: string): Observable<User[]> {
+    return this.http.post<User[]>(`${this.apiUrl}/validate`, { username, password });
   }
 }

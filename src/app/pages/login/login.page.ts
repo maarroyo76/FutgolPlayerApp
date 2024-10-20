@@ -9,7 +9,6 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
   username!: string;
   password!: string;
 
@@ -19,8 +18,7 @@ export class LoginPage implements OnInit {
     private toastController: ToastController
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   async login() {
     this.userService.validateUser(this.username, this.password).subscribe(async (response) => {
@@ -38,6 +36,9 @@ export class LoginPage implements OnInit {
     });
   }
 
+  register() {
+    this.router.navigate(['/register']); // Redirige a la página de registro
+  }
 
   createToast(message: string, color: string) {
     this.toastController.create({

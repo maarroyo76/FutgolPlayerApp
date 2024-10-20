@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title id="header">
-      FutgolPlayer APP |  Registro
+      FutgolPlayer APP | Registro
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -11,30 +11,32 @@
     <div id="title">
       <h2>Bienvenido a FutgolPlayer APP</h2>
       <p>Tu pasión, tus estadísticas, tu comunidad</p>
-      <h3>Porfavor ingresa tus datos para registrarte</h3>
+      <h3>Por favor ingresa tus datos para registrarte</h3>
     </div>
     <ion-list id="form">
       <ion-item>
-        <ion-input label="Nombre" labelPlacement="stacked" placeholder="Ingresa tu nombre" [(ngModel)]="name"></ion-input>
+        <ion-input label="Nombre" labelPlacement="stacked" placeholder="Ingresa tu nombre" [(ngModel)]="user.name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input label="Apellido" labelPlacement="stacked" placeholder="Ingresa tu apellido" [(ngModel)]="lastname"></ion-input>
+        <ion-input label="Apellido" labelPlacement="stacked" placeholder="Ingresa tu apellido" [(ngModel)]="user.lastname"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input label="Nombre de Usuario" labelPlacement="stacked" placeholder="Ingresa tu username" [(ngModel)]="username"></ion-input>
+        <ion-input label="Nombre de Usuario" labelPlacement="stacked" placeholder="Ingresa tu username" [(ngModel)]="user.username"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input label="Correo" labelPlacement="stacked" placeholder="Ingresa tu correo" [(ngModel)]="email"></ion-input>
+        <ion-input label="Correo" labelPlacement="stacked" placeholder="Ingresa tu correo" [(ngModel)]="user.email"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input type="password" label="Contraseña" labelPlacement="stacked" placeholder="Ingresa tu contraseña" [(ngModel)]="password">
+        <ion-input type="password" label="Contraseña" labelPlacement="stacked" placeholder="Ingresa tu contraseña" [(ngModel)]="user.password">
           <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         </ion-input>
       </ion-item>
     </ion-list>
     <ion-button expand="block" fill="outline" id="button" (click)="register()" [disabled]="!isFormValid">Registrarse</ion-button>
+
   </div>
 </ion-content>
+
 <ion-footer>
   <ion-toolbar>
     <ion-title id="footer">
