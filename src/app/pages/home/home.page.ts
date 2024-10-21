@@ -10,12 +10,12 @@ import { UserService } from '../../services/user.service';
 export class HomePage implements OnInit {
 
   user: any = {
-  id: '',
-  name: '',
-  lastname: '',
-  username: '',
-  password: '',
-  email: ''
+    id: '',
+    name: '',
+    lastname: '',
+    username: '',
+    password: '',
+    email: ''
   };
 
   constructor(
