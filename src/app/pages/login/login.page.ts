@@ -18,24 +18,41 @@ export class LoginPage implements OnInit {
     private toastController: ToastController
   ) { }
 
-  ngOnInit() {}
-
+  ngOnInit() { }
+  
   async login() {
-    this.userService.validateUser(this.username, this.password).subscribe(async (response) => {
-      if (response.length > 0) {
-        this.createToast('Bienvenido,  ' + response[0].name, 'success');
-        this.router.navigate(['/home']);
-      } else {
-        this.createToast('Usuario o contraseña incorrectos', 'danger');
+    if (!this.username || !this.password) {
+      this.showToast('Por favor, complete ambos campos.', 'warning');
+      return;
+    }
+
+    this.userService.validateUser(this.username, this.password).subscribe(
+      (users) => {
+        if (users.length > 0) {
+          this.showToast('Bienvenido, ' + this.username + '!', 'success'); 
+          this.clear();
+          this.router.navigate(['/home']);
+        } else {
+          this.showToast('Credenciales inválidas!', 'danger');
+        }
+      },
+      (error) => {
+        this.showToast('Error en el servidor, intenta más tarde.', 'danger');
       }
-    });
+    );
   }
+
 
   register() {
     this.router.navigate(['/register']);
   }
 
-  createToast(message: string, color: string) {
+  clear() {
+    this.username = '';
+    this.password = '';
+  }
+
+  showToast(message: string, color: string) {
     this.toastController.create({
       message: message,
       duration: 2000,

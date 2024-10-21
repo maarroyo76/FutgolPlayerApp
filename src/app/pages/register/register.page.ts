@@ -19,6 +19,7 @@ export class RegisterPage implements OnInit {
     password: '',
     email: ''
   };
+  lastUserId!: number;
 
   constructor(
     private router: Router,
@@ -59,8 +60,8 @@ export class RegisterPage implements OnInit {
     ).subscribe({
       next: () => {
         this.showToast('Registro exitoso!', 'success');
-        this.router.navigate(['/login']);
         this.clearForm();
+        this.router.navigate(['/login']);
       },
       error: () => {
         this.showToast('Nombre de usuario ya en uso', 'warning');
