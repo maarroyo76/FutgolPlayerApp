@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title id="header">Recupera tu contraseña</ion-title>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/login']">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <div id="title">
+      <h2>Recupera tu contraseña</h2>
+      <p>Ingresa tus datos para continuar</p>
+    </div>
+    <ion-list id="form">
+      <ion-item>
+        <ion-input label="Nombre de Usuario" labelPlacement="stacked" placeholder="Ingresa tu username" [(ngModel)]="user.username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Nombre" labelPlacement="stacked" placeholder="Ingresa tu nombre" [(ngModel)]="user.name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Apellido" labelPlacement="stacked" placeholder="Ingresa tu apellido" [(ngModel)]="user.lastname"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" fill="outline" id="button" (click)="findUser()">Recuperar</ion-button>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title id="footer">
+      <ion-label>© 2024 FutgolPlayer APP</ion-label>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

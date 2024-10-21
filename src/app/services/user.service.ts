@@ -19,8 +19,20 @@ export class UserService {
     return this.http.get<User[]>(this.apiUrl);
   }
 
+  getUserById(id: string): Observable<User> {
+    return this.http.get<User>(this.apiUrl + '/' + id);
+  }
+
+  changePassword(id: number, newPassword: string): Observable<User> {
+    return this.http.patch<User>(this.apiUrl + '/' + id, { password: newPassword });
+  }
+
   createUser(user: User): Observable<User> {
     return this.http.post<User>(this.apiUrl, user);
+  }
+
+  findUser(username: string, name: string, lastname: string): Observable<User[]> {
+    return this.http.get<User[]>('http://localhost:3000/users?username=' + username + '&name=' + name + '&lastname=' + lastname);
   }
 
   validateUser(username: string, password: string) {
