@@ -10,73 +10,149 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-tabs>
-  <ion-tab tab="Teams">
-    <div id="teams-page">
+  <ion-tabs #myTabs>
+    <!-- Tab Equipos -->
+    <ion-tab tab="teams">
       <ion-header>
         <ion-toolbar>
           <ion-title>Equipos</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <div class="example-content">todos los equipos</div>
+        <ng-container *ngIf="userTeam">
+          <h2>Tu Equipo</h2>
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ userTeam.name }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p><strong>Ciudad:</strong> {{ userTeam.city }}</p>
+              <p><strong>Entrenador:</strong> {{ userTeam.coach }}</p>
+              <p><strong>Jugadores:</strong> {{ userTeam.players.length }}</p>
+              <p><strong>Partidos Jugados:</strong> {{ userTeam.matchesPlayed }}</p>
+              <p><strong>Victorias:</strong> {{ userTeam.wins }}</p>
+              <p><strong>Derrotas:</strong> {{ userTeam.losses }}</p>
+              <p><strong>Empates:</strong> {{ userTeam.draws }}</p>
+              <p><strong>Goles Totales:</strong> {{ userTeam.goalsScored }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ng-container>
+        <!-- Mostrar otros equipos -->
+        <h2>Todos los equipos</h2>
+        <ng-container *ngFor="let team of teams">
+          <ion-card *ngIf="team.id !== userTeam?.id">
+            <ion-card-header>
+              <ion-card-title>{{ team.name }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p><strong>Ciudad:</strong> {{ team.city }}</p>
+              <p><strong>Entrenador:</strong> {{ team.coach }}</p>
+              <p><strong>Jugadores:</strong> {{ team.players.length }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ng-container>
       </ion-content>
-    </div>
-  </ion-tab>
-  <ion-tab tab="SearchMatches">
-    <div id="search-page">
+    </ion-tab>
+
+    <!-- Tab Buscar Partidos -->
+    <ion-tab tab="search-matches">
       <ion-header>
         <ion-toolbar>
           <ion-title>Buscar Partido</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <div class="example-content">Partidos disponibles</div>
+        <ion-card *ngFor="let match of matches">
+          <ion-card-header>
+            <ion-card-title>{{ getTeamNameById(match.teams.teamA) }} vs {{ getTeamNameById(match.teams.teamB) }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p><strong>Fecha:</strong> {{ match.date | date:'short' }}</p>
+            <p><strong>Ubicacion:</strong> {{ match.location }}</p>
+            <p><strong>Estado:</strong> {{ matchStatusTranslations[match.status] }}</p>
+            <p><strong>Creado por:</strong> {{ match.createdBy }}</p>
+          </ion-card-content>
+        </ion-card>
       </ion-content>
-    </div>
-  </ion-tab>
-  <ion-tab tab="CreateMatch">
-    <div id="create-page">
+    </ion-tab>
+
+    <!-- Tab Crear Partido -->
+    <ion-tab tab="create-match">
       <ion-header>
         <ion-toolbar>
           <ion-title>Crear Partido</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <div class="example-content">crea tu partido</div>
+        <div class="form">
+          <h2>Crea tu partido</h2>
+          <ion-item>
+            <ion-label>Equipo A</ion-label>
+            <ion-select [(ngModel)]="match.teams.teamA" placeholder="Selecciona un equipo">
+              <ion-select-option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Equipo B</ion-label>
+            <ion-select [(ngModel)]="match.teams.teamB" placeholder="Selecciona un equipo">
+              <ion-select-option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Ubicacion</ion-label>
+            <ion-input placeholder="Indica una ubicacion" slot="end" [(ngModel)]="match.location"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Fecha y Hora del Partido" [value]="match.date | date: 'dd-MM-yyyy HH:mm'" readonly></ion-input>
+            <ion-button fill="clear" id="open-datetime">
+              <ion-icon size="large" slot="icon-only" name="calendar"></ion-icon>
+            </ion-button>
+            <ion-popover trigger="open-datetime" triggerAction="click">
+              <ng-template>
+                <ion-datetime 
+                  [(ngModel)]="match.date" 
+                  locale="es-ES"
+                  [showDefaultButtons]="true" 
+                  presentation="date-time">
+                </ion-datetime>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+          <ion-button expand="block" (click)="createMatch()">Crear Partido</ion-button>
+        </div>
       </ion-content>
-    </div>
-  </ion-tab>
-  <ion-tab tab="Live">
-    <div id="live-page">
+    </ion-tab>
+
+    <!-- Tab En Vivo -->
+    <ion-tab tab="live">
       <ion-header>
         <ion-toolbar>
           <ion-title>Partidos en VIVO</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <div class="example-content">Mira partidos en VIVO</div>
+        <div class="content">Mira partidos en VIVO</div>
       </ion-content>
-    </div>
-  </ion-tab>
+    </ion-tab>
 
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="Teams">
-      <ion-icon name="people-circle-outline"></ion-icon>
-      Equipos
-    </ion-tab-button>
-    <ion-tab-button tab="SearchMatches">
-      <ion-icon name="search"></ion-icon>
-      Buscar Partidos
-    </ion-tab-button>
-    <ion-tab-button tab="CreateMatch">
-      <ion-icon name="add-circle-outline"></ion-icon>
-      Crear Partido
-    </ion-tab-button>
-    <ion-tab-button tab="Live">
-      <ion-icon name="radio-outline"></ion-icon>
-      En Vivo
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+    <!-- Tab Bar -->
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="teams">
+        <ion-icon name="people-circle-outline"></ion-icon>
+        <ion-label>Equipos</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="search-matches">
+        <ion-icon name="search"></ion-icon>
+        <ion-label>Buscar Partidos</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="create-match">
+        <ion-icon name="add-circle-outline"></ion-icon>
+        <ion-label>Crear Partido</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="live">
+        <ion-icon name="radio-outline"></ion-icon>
+        <ion-label>En Vivo</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>

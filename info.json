@@ -1,37 +1,276 @@
 {
-    "users":[
-        {
-            "id": 1,
-            "name": "martin",
-            "lastname": "arroyo",
-            "email": "ma.arroyoq@duocuc.cl",
-            "username": "martin",
-            "password": "martin1234"
-        },
-        {
-            "id": 2,
-            "name": "oscar",
-            "lastname": "bustamante",
-            "email": "osca.bustamante@duocuc.cl",
-            "username": "oscar",
-            "password": "oscar1234"
-        },
-        {
-            "id": 3,
-            "name": "renato",
-            "lastname": "reinoso",
-            "email": "re.reinoso@duocuc.cl",
-            "username": "renato",
-            "password": "renato1234"
-        },
-        {
-            "id": 4,
-            "name": "nicolas",
-            "lastname": "cifuentes",
-            "email": "nic.cifuentes@duocuc.cl",
-            "username": "nicolas",
-            "password": "nicolas1234"
+  "users": [
+    {
+      "id": 1,
+      "name": "Martin",
+      "lastname": "Arroyo",
+      "email": "ma.arroyoq@duocuc.cl",
+      "username": "martin",
+      "password": "martin1234"
+    },
+    {
+      "id": 2,
+      "name": "Oscar",
+      "lastname": "Bustamante",
+      "email": "osca.bustamante@duocuc.cl",
+      "username": "oscar",
+      "password": "oscar1234"
+    },
+    {
+      "id": 3,
+      "name": "Renato",
+      "lastname": "Reinoso",
+      "email": "re.reinoso@duocuc.cl",
+      "username": "renato",
+      "password": "renato1234"
+    },
+    {
+      "id": 4,
+      "name": "Nicolas",
+      "lastname": "Cifuentes",
+      "email": "nic.cifuentes@duocuc.cl",
+      "username": "nicolas",
+      "password": "nicolas1234"
+    },
+    {
+      "id": 5,
+      "name": "Camila",
+      "lastname": "Torres",
+      "email": "cam.torres@duocuc.cl",
+      "username": "camila",
+      "password": "camila1234"
+    },
+    {
+      "id": 6,
+      "name": "Jorge",
+      "lastname": "Gonzalez",
+      "email": "jor.ge@duocuc.cl",
+      "username": "jorge",
+      "password": "jorge1234"
+    },
+    {
+      "id": 7,
+      "name": "Lucia",
+      "lastname": "Pérez",
+      "email": "lucia.perez@duocuc.cl",
+      "username": "lucia",
+      "password": "lucia1234"
+    },
+    {
+      "id": 8,
+      "name": "Carlos",
+      "lastname": "Vega",
+      "email": "car.vega@duocuc.cl",
+      "username": "carlos",
+      "password": "carlos1234"
+    },
+    {
+      "id": 9,
+      "name": "Daniela",
+      "lastname": "Contreras",
+      "email": "dan.contreras@duocuc.cl",
+      "username": "daniela",
+      "password": "daniela1234"
+    },
+    {
+      "id": 10,
+      "name": "Felipe",
+      "lastname": "Mendoza",
+      "email": "felipe.mendoza@duocuc.cl",
+      "username": "felipe",
+      "password": "felipe1234"
+    }
+  ],
+  "teams": [
+    {
+      "id": 1,
+      "name": "Los Guerreros",
+      "players": [
+        1,
+        2
+      ],
+      "coach": "Carlos Pérez",
+      "city": "Santiago",
+      "matchesPlayed": 6,
+      "wins": 4,
+      "losses": 2,
+      "draws": 0,
+      "goalsScored": 12
+    },
+    {
+      "id": 2,
+      "name": "Los Leones",
+      "players": [
+        3,
+        4
+      ],
+      "coach": "Luis Ramírez",
+      "city": "Santiago",
+      "matchesPlayed": 8,
+      "wins": 5,
+      "losses": 2,
+      "draws": 1,
+      "goalsScored": 17
+    },
+    {
+      "id": 3,
+      "name": "Los Tigres",
+      "players": [
+        1,
+        3
+      ],
+      "coach": "Marta Díaz",
+      "city": "Santiago",
+      "matchesPlayed": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "goalsScored": 0
+    },
+    {
+      "id": 4,
+      "name": "Las Águilas",
+      "players": [
+        2,
+        4
+      ],
+      "coach": "Roberto López",
+      "city": "Santiago",
+      "matchesPlayed": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "goalsScored": 0
+    }
+  ],
+  "matches": [
+    {
+      "id": 1,
+      "date": "2024-11-05T15:00:00Z",
+      "location": "Estadio Municipal",
+      "teams": {
+        "teamA": 1,
+        "teamB": 2
+      },
+      "score": {
+        "teamA": 2,
+        "teamB": 3
+      },
+      "status": "Finished",
+      "createdBy": "martin",
+      "liveStreamUrl": "https://example.com/livestream/match1",
+      "statistics": {
+        "goals": [
+          {
+            "playerId": 1,
+            "time": "12:30"
+          },
+          {
+            "playerId": 3,
+            "time": "25:15"
+          },
+          {
+            "playerId": 4,
+            "time": "45:50"
+          },
+          {
+            "playerId": 1,
+            "time": "53:10"
+          },
+          {
+            "playerId": 2,
+            "time": "78:20"
+          }
+        ],
+        "fouls": [
+          {
+            "playerId": 2,
+            "time": "35:10"
+          },
+          {
+            "playerId": 4,
+            "time": "68:50"
+          }
+        ],
+        "yellowCards": [
+          {
+            "playerId": 2,
+            "time": "35:10"
+          }
+        ],
+        "redCards": [],
+        "possession": {
+          "teamA": 55,
+          "teamB": 45
         }
-    ]
-
+      }
+    },
+    {
+      "id": 2,
+      "date": "2024-11-12T18:30:00Z",
+      "location": "Complejo Deportivo Las Palmas",
+      "teams": {
+        "teamA": 3,
+        "teamB": 4
+      },
+      "score": {
+        "teamA": 1,
+        "teamB": 1
+      },
+      "status": "Scheduled",
+      "createdBy": "oscar",
+      "liveStreamUrl": null,
+      "statistics": {
+        "goals": [],
+        "fouls": [],
+        "yellowCards": [],
+        "redCards": [],
+        "possession": {
+          "teamA": 0,
+          "teamB": 0
+        }
+      }
+    },
+    {
+      "id": 3,
+      "date": "2024-11-15T20:00:00Z",
+      "location": "Parque Central",
+      "teams": {
+        "teamA": 1,
+        "teamB": 4
+      },
+      "score": {
+        "teamA": 0,
+        "teamB": 0
+      },
+      "status": "Ongoing",
+      "createdBy": "renato",
+      "liveStreamUrl": "https://example.com/livestream/match3",
+      "statistics": {
+        "goals": [
+          {
+            "playerId": 3,
+            "time": "10:30"
+          }
+        ],
+        "fouls": [
+          {
+            "playerId": 2,
+            "time": "12:15"
+          }
+        ],
+        "yellowCards": [
+          {
+            "playerId": 2,
+            "time": "12:15"
+          }
+        ],
+        "redCards": [],
+        "possession": {
+          "teamA": 52,
+          "teamB": 48
+        }
+      }
+    }
+  ]
 }
