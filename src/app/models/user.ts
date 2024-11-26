@@ -3,6 +3,7 @@ export interface User {
     name: string;
     lastname: string;
     email: string;
+    referee: boolean;
     username: string;
     password: string;
 }

@@ -4,7 +4,7 @@ export interface Match {
   location: string;
   teams: { teamA: number; teamB: number };
   score: { teamA: number; teamB: number };
-  status: 'Scheduled' | 'Ongoing' | 'Finished';
+  status: 'Programado' | 'En Progreso' | 'Terminado';
   createdBy: string;
   liveStreamUrl?: string;
   statistics?: MatchStatistics;

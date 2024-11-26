@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Detalles del Partido</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="partido-details" *ngIf="match">
+    <div class="equipos">
+      <span class="vs">{{ getTeamNameById(match.teams.teamA) }} vs {{ getTeamNameById(match.teams.teamB) }}</span>
+    </div>
+    <div class="fecha-hora">
+      <p>Fecha: {{ match.date | date:'longDate' }}</p>
+      <p>Hora: {{ match.date | date:'shortTime' }}</p>
+    </div>
+    <div class="estado">
+      <ion-chip [color]="match.status === 'En Progreso' ? 'success' : (match.status === 'Programado' ? 'warning' : 'dark')">
+        <ion-label>{{ match.status }}</ion-label>
+      </ion-chip>
+    </div>
+    <div class="marcador">
+      <h2>{{ match.score.teamA }} - {{ match.score.teamB }}</h2>
+      <p *ngIf="match.status === 'En Progreso'">Tiempo: </p>
+    </div>
+    <ion-button expand="block" color="primary" >Agregar a Calendario</ion-button>
+    <ion-button expand="block" color="secondary" >Ver Estadísticas</ion-button>
+    <ion-button expand="block" color="danger" [disabled]="!match || isMeetingActive" (click)="openJitsi()">Ver partido en vivo</ion-button>
+
+    <div id="meet" [hidden]="!isMeetingActive" style="height: 100vh; width: 100%;"></div>
+  </div>
+</ion-content>
+
+<ion-footer>
+</ion-footer>

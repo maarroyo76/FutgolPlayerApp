@@ -2,8 +2,8 @@
   <ion-toolbar>
     <ion-title>FutgolPlayer APP | Home</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="logOut()">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      <ion-button (click)="goProfile()">
+        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -21,32 +21,24 @@
       <ion-content>
         <ng-container *ngIf="userTeam">
           <h2>Tu Equipo</h2>
-          <ion-card>
+          <ion-card button="true" (click)="goTeam(userTeam)">
             <ion-card-header>
               <ion-card-title>{{ userTeam.name }}</ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              <p><strong>Ciudad:</strong> {{ userTeam.city }}</p>
-              <p><strong>Entrenador:</strong> {{ userTeam.coach }}</p>
               <p><strong>Jugadores:</strong> {{ userTeam.players.length }}</p>
               <p><strong>Partidos Jugados:</strong> {{ userTeam.matchesPlayed }}</p>
-              <p><strong>Victorias:</strong> {{ userTeam.wins }}</p>
-              <p><strong>Derrotas:</strong> {{ userTeam.losses }}</p>
-              <p><strong>Empates:</strong> {{ userTeam.draws }}</p>
-              <p><strong>Goles Totales:</strong> {{ userTeam.goalsScored }}</p>
             </ion-card-content>
           </ion-card>
         </ng-container>
         <!-- Mostrar otros equipos -->
         <h2>Todos los equipos</h2>
         <ng-container *ngFor="let team of teams">
-          <ion-card *ngIf="team.id !== userTeam?.id">
+          <ion-card *ngIf="team.id !== userTeam?.id" button="true" (click)="goTeam(team)">
             <ion-card-header>
               <ion-card-title>{{ team.name }}</ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              <p><strong>Ciudad:</strong> {{ team.city }}</p>
-              <p><strong>Entrenador:</strong> {{ team.coach }}</p>
               <p><strong>Jugadores:</strong> {{ team.players.length }}</p>
             </ion-card-content>
           </ion-card>
@@ -62,14 +54,14 @@
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <ion-card *ngFor="let match of matches">
+        <ion-card *ngFor="let match of matches" button="true" (click)="goMatch(match)">
           <ion-card-header>
             <ion-card-title>{{ getTeamNameById(match.teams.teamA) }} vs {{ getTeamNameById(match.teams.teamB) }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <p><strong>Fecha:</strong> {{ match.date | date:'short' }}</p>
             <p><strong>Ubicacion:</strong> {{ match.location }}</p>
-            <p><strong>Estado:</strong> {{ matchStatusTranslations[match.status] }}</p>
+            <p><strong>Estado:</strong> {{ match.status }}</p>
             <p><strong>Creado por:</strong> {{ match.createdBy }}</p>
           </ion-card-content>
         </ion-card>
@@ -123,18 +115,6 @@
       </ion-content>
     </ion-tab>
 
-    <!-- Tab En Vivo -->
-    <ion-tab tab="live">
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Partidos en VIVO</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <div class="content">Mira partidos en VIVO</div>
-      </ion-content>
-    </ion-tab>
-
     <!-- Tab Bar -->
     <ion-tab-bar slot="bottom">
       <ion-tab-button tab="teams">
@@ -148,10 +128,6 @@
       <ion-tab-button tab="create-match">
         <ion-icon name="add-circle-outline"></ion-icon>
         <ion-label>Crear Partido</ion-label>
-      </ion-tab-button>
-      <ion-tab-button tab="live">
-        <ion-icon name="radio-outline"></ion-icon>
-        <ion-label>En Vivo</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>

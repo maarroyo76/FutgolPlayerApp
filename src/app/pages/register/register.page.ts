@@ -17,7 +17,8 @@ export class RegisterPage implements OnInit {
     lastname: '',
     username: '',
     password: '',
-    email: ''
+    email: '',
+    referee: false
   };
   lastUserId!: number;
 
@@ -76,7 +77,8 @@ export class RegisterPage implements OnInit {
       lastname: '',
       username: '',
       password: '',
-      email: ''
+      email: '',
+      referee: false
     };
   }
 

@@ -29,6 +29,11 @@
         <ion-input label="Nombre de Usuario" labelPlacement="stacked" placeholder="Ingresa tu username" [(ngModel)]="user.username"></ion-input>
       </ion-item>
       <ion-item>
+        <ion-label>¿Registrarse como arbitro?</ion-label>
+        <ion-toggle slot="end" class="custom-toggle" [(ngModel)]="user.referee"></ion-toggle>
+        <span class="toggle-text">{{ user.referee ? 'Sí' : 'No' }}</span>
+      </ion-item>
+      <ion-item>
         <ion-input type="email" label="Correo" labelPlacement="stacked" placeholder="Ingresa tu correo" [(ngModel)]="user.email"></ion-input>
       </ion-item>
       <ion-item>

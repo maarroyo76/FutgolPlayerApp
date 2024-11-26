@@ -12,7 +12,7 @@ interface Match {
   location: string;
   teams: { teamA: number; teamB: number };
   score: { teamA: number; teamB: number };
-  status: 'Scheduled' | 'Ongoing' | 'Finished';
+  status: 'Programado' | 'En Progreso' | 'Terminado';
   createdBy: string;
 }
 
@@ -30,7 +30,7 @@ export class HomePage implements OnInit {
     location: '',
     teams: { teamA: 0, teamB: 0 },
     score: { teamA: 0, teamB: 0 },
-    status: 'Scheduled',
+    status: 'Programado',
     createdBy: ''
   };
 
@@ -59,35 +59,30 @@ export class HomePage implements OnInit {
     this.getTeams();
   }
 
-  matchStatusTranslations = {
-    'Scheduled': 'Programado',
-    'Ongoing': 'En Progreso',
-    'Finished': 'Finalizado'
-  };
 
   async presentLoading(message: string) {
     const loading = await this.loadingController.create({
       message,
-      duration: 2000, // Duración del loading
+      duration: 1000, // Duración del loading
       spinner: 'crescent',
     });
     await loading.present();
   }
 
   async getMatches() {
-    this.loadingMatches = true; // Iniciar carga
-    await this.presentLoading('Cargando partidos...'); // Mostrar loader
+    this.loadingMatches = true; 
+    await this.presentLoading('Cargando partidos...');
 
     this.matchService.getMatches().subscribe(
       (matches) => {
         this.matches = matches;
-        this.loadingMatches = false; // Finalizar carga
-        this.loadingController.dismiss(); // Ocultar loader
+        this.loadingMatches = false; 
+        this.loadingController.dismiss(); 
       },
       (error) => {
         console.error('Error al obtener partidos:', error);
-        this.loadingMatches = false; // Finalizar carga en caso de error
-        this.loadingController.dismiss(); // Ocultar loader
+        this.loadingMatches = false;
+        this.loadingController.dismiss();
       }
     );
   }
@@ -98,18 +93,18 @@ export class HomePage implements OnInit {
   }
 
   async getTeams() {
-    await this.presentLoading('Cargando equipos...'); // Mostrar loader
+    await this.presentLoading('Cargando equipos...');
 
     this.teamService.getTeams().subscribe(
       (teams) => {
         this.teams = teams;
         this.setUserTeam();
-        this.loadingController.dismiss(); // Ocultar loader
+        this.loadingController.dismiss();
       },
       (error) => {
         console.error('Error al obtener equipos:', error);
         this.showToast('No se pudieron cargar los equipos', 'danger');
-        this.loadingController.dismiss(); // Ocultar loader
+        this.loadingController.dismiss(); 
       }
     );
   }
@@ -129,16 +124,20 @@ export class HomePage implements OnInit {
       return;
     }
     
-    this.match.createdBy = this.user.username; // Cambiar a nombre de usuario
-    this.presentLoading('Creando partido...'); // Mostrar el loader
+    
+    const lastMatch = this.matches[this.matches.length - 1];
+    this.match.id = lastMatch ? Number(lastMatch.id) + 1 : 1; 
+
+    this.match.createdBy = this.user.username; 
+    this.presentLoading('Creando partido...'); 
 
     this.matchService.createMatch(this.match).subscribe({
       next: (newMatch) => {
         this.matches.push(newMatch);
-        this.tabs.select('search-matches'); // Cambiar a la pestaña de partidos
+        this.tabs.select('search-matches'); 
         this.showToast('Partido creado exitosamente!', 'success');
-        this.resetMatch(); // Reiniciar el objeto match
-        this.loadingController.dismiss(); // Ocultar el loader
+        this.resetMatch(); 
+        this.loadingController.dismiss(); 
       },
       error: (error) => {
         const errorMessage = error.error?.message || 'Error al crear el partido';
@@ -148,6 +147,8 @@ export class HomePage implements OnInit {
     });
   }
 
+
+
   resetMatch() {
     this.match = {
       id: 0,
@@ -155,15 +156,34 @@ export class HomePage implements OnInit {
       location: '',
       teams: { teamA: 0, teamB: 0 },
       score: { teamA: 0, teamB: 0 },
-      status: 'Scheduled',
+      status: 'Programado',
       createdBy: ''
     };
   }
 
-  logOut() {
-    this.userService.logOut();
-    this.showToast('Sesión cerrada con éxito!', 'success');
-    this.router.navigate(['/login']);
+  goMatch(match: Match) {
+    if (match.id !== 0) {
+      this.router.navigate(['/match'], {
+        state: { match: match, teams: this.teams }
+      });
+    } else {
+      this.showToast('No hay un partido para ver.', 'danger');
+    }
+  }
+
+  goTeam(team: Team) {
+    if (team.id !== 0) {
+      this.router.navigate(['/team'], {
+        state: { team: team }
+      });
+    } else {
+      this.showToast('No hay un equipo para ver.', 'danger');
+    }
+  }
+
+
+  goProfile() {
+    this.router.navigate(['/profile']);
   }
 
   showToast(message: string, color: string) {

@@ -17,11 +17,11 @@
       <p>Tu pasión, tus estadísticas, tu comunidad</p>
       <h3>Porfavor ingresa sesion para continuar</h3>
     </div>
-    <ion-list id="form">
-      <ion-item>
+    <ion-list id="form" mode="ios">
+      <ion-item mode="ios">
         <ion-input label="Nombre de Usuario" labelPlacement="stacked" placeholder="Ingresa tu username" [(ngModel)]="username"></ion-input>
       </ion-item>
-      <ion-item> 
+      <ion-item mode="ios"> 
         <ion-input type="password" label="Contraseña" labelPlacement="stacked" placeholder="Ingresa tu contraseña" [(ngModel)]="password">
           <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         </ion-input>

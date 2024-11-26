@@ -25,6 +25,22 @@ const routes: Routes = [
     path: 'recover',
     loadChildren: () => import('./pages/recover/recover.module').then( m => m.RecoverPageModule)
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'match',
+    loadChildren: () => import('./pages/match/match.module').then(m => m.MatchPageModule),
+    canActivate: [AuthGuard]
+  },  {
+    path: 'team',
+    loadChildren: () => import('./pages/team/team.module').then( m => m.TeamPageModule)
+  },
+
+
+
 
 ];
 

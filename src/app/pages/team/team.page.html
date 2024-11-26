@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Equipo</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <h1>{{ team?.name }}</h1>
+    <ion-list>
+      <ion-item>
+        <ion-label>Ciudad:</ion-label>
+        <ion-text>{{ team?.city }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Entrenador:</ion-label>
+        <ion-text>{{ team?.coach }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Partidos Jugados:</ion-label>
+        <ion-text>{{ team?.matchesPlayed }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Victorias:</ion-label>
+        <ion-text>{{ team?.wins }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Derrotas:</ion-label>
+        <ion-text>{{ team?.losses }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Empates:</ion-label>
+        <ion-text>{{ team?.draws }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Goles Anotados:</ion-label>
+        <ion-text>{{ team?.goalsScored }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Jugadores:</ion-label>
+        <ion-text>{{ team?.players?.length }} Jugadores</ion-text>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

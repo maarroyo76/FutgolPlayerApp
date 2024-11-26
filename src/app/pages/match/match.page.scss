@@ -1,0 +1,40 @@
+.partido-details {
+  padding: 16px;
+  text-align: center;
+}
+
+.equipos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.equipos ion-avatar {
+  margin: 0 10px;
+}
+
+.vs {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.fecha-hora p, .estado p {
+  font-size: 16px;
+}
+
+.marcador h2 {
+  font-size: 48px;
+  font-weight: bold;
+  color: #FFEE38;
+}
+
+.mapa iframe {
+  border-radius: 8px;
+}
+
+ion-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
